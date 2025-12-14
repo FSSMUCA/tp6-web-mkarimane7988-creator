@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+      <title>TP 6 : Calculatrice Web & Introduction PHP</title>
+      <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      
+    
+       <header>
+         <h1>Mini-Application Web Avancée</h1>
+         <p>Calculatrice dynamique (JS) et introduction à PHP</p>
+       </header>
+
+        <main>
+        
+         <section id="calculatrice" aria-labelledby="calc-heading">
+            <h2 id="calc-heading">Calculatrice Locale</h2>
+            <form id="calculator-form">
+                
+                <div class="input-group">
+                    <label for="nombreA">Nombre A :</label>
+                    <input type="number" id="nombreA" name="nombreA" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="nombreB">Nombre B :</label>
+                    <input type="number" id="nombreB" name="nombreB" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="operation">Opération :</label>
+                    <select id="operation" name="operation" required>
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">×</option>
+                        <option value="/">÷</option>
+                    </select>
+                </div>
+                
+                <button type="submit" id="btn-calculer">Calculer</button>
+             </form>
+            
+             <div id="resultat-zone">
+                <h3>Résultat : <span id="resultat"></span></h3>
+             </div>
+            
+             <div id="erreur-messages" role="alert" aria-live="polite">
+                </div>
+          </section>
+
+        <aside id="historique" aria-labelledby="hist-heading">
+            <h2 id="hist-heading">Historique des opérations</h2>
+            
+            <button id="toggle-historique-btn">Afficher l'Historique</button>
+            
+            <div id="historique-conteneur" class="historique-cache"> 
+                <ul id="historique-liste">
+                    <li class="placeholder">Aucune opération effectuée pour l'instant.</li>
+                </ul>
+            </div>
+        </aside>
+
+     </main>
+
+     <footer>
+        <p>&copy; TP 6 - Mini-Application Web - [moucine karimane]</p>
+     </footer>
+
+     <script src="app.js"></script>
+</body>
+    </body>
+</html>
