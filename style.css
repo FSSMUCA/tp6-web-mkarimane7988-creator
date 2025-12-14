@@ -1,0 +1,239 @@
+/* --- 1. Réinitialisation et Variables de Base --- */
+:root {
+    --couleur-primaire: #007bff; /* Bleu pour les boutons et accents */
+    --couleur-secondaire: #6c757d; /* Gris pour les textes secondaires */
+    --couleur-fond: #f8f9fa; /* Fond de page très clair */
+    --couleur-card: #ffffff; /* Fond des sections/cards */
+    --couleur-texte: #343a40; /* Couleur du texte principal */
+    --couleur-erreur: #dc3545; /* Rouge pour les messages d'erreur */
+    --ombre-legere: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition-rapide: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--couleur-texte);
+    background-color: var(--couleur-fond);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Pour s'assurer que le footer reste en bas */
+}
+
+/* --- 2. Structure Générale (Header, Main, Footer) --- */
+
+header {
+    background-color: var(--couleur-primaire);
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+    box-shadow: var(--ombre-legere);
+}
+
+header h1 {
+    margin-bottom: 5px;
+}
+
+main {
+    flex-grow: 1; /* Permet au contenu principal de prendre l'espace disponible */
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    /* Utilisation de CSS Grid pour une mise en page flexible sur grand écran */
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 2fr 1fr; /* Calculatrice prend 2/3, Historique 1/3 */
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #e9ecef;
+    color: var(--couleur-secondaire);
+    margin-top: auto; /* Pousse le footer vers le bas */
+}
+
+/* --- 3. Styles des Cards et Sections --- */
+
+section, aside {
+    background-color: var(--couleur-card);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: var(--ombre-legere);
+}
+
+/* Style spécifique de l'historique (Card visuelle) */
+#historique {
+    border-left: 5px solid var(--couleur-primaire);
+}
+
+h2 {
+    color: var(--couleur-primaire);
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+/* --- 4. Formulaire de la Calculatrice (Flexbox) --- */
+
+#calculator-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--couleur-texte);
+}
+
+input[type="number"],
+select {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color var(--transition-rapide);
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: var(--couleur-primaire);
+    outline: none;
+}
+
+/* Bouton Calculer */
+#btn-calculer {
+    background-color: var(--couleur-primaire);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: var(--transition-rapide); /* Application de la transition */
+    margin-top: 10px;
+}
+
+/* Effet Hover/Transition sur le bouton */
+#btn-calculer:hover {
+    background-color: #0056b3; /* Bleu plus foncé */
+    transform: translateY(-2px); /* Léger déplacement vers le haut */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* --- 5. Affichage des Résultats et Erreurs --- */
+
+#resultat-zone {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e2f0ff;
+    border-left: 4px solid var(--couleur-primaire);
+    border-radius: 4px;
+}
+
+#resultat {
+    font-weight: bold;
+    color: var(--couleur-primaire);
+    font-size: 1.5em;
+}
+
+#erreur-messages {
+    margin-top: 15px;
+    padding: 10px;
+    color: var(--couleur-erreur);
+    background-color: #f8d7da;
+    border: 1px solid var(--couleur-erreur);
+    border-radius: 4px;
+    display: none; /* Caché par défaut, sera affiché par JS si erreur */
+    font-weight: bold;
+}
+
+/* --- 6. Historique (Card) --- */
+
+#historique-liste {
+    list-style: none;
+    padding: 0;
+}
+
+#historique-liste li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #e9ecef;
+    font-size: 0.95em;
+}
+
+#historique-liste li:last-child {
+    border-bottom: none;
+}
+
+/* --- 7. Responsive Design (Media Queries) --- */
+
+/* Pour les écrans plus petits (mobiles, tablettes en portrait) */
+@media (max-width: 768px) {
+    
+    /* Réorganisation en une seule colonne */
+    main {
+        grid-template-columns: 1fr;
+        width: 95%;
+        padding: 15px;
+    }
+    
+    header {
+        padding: 15px 20px;
+    }
+    
+    section, aside {
+        padding: 20px;
+    }
+    
+    /* Empêche l'historique d'être trop grand en haut de page */
+    #historique {
+        order: -1; /* Place l'historique avant la calculatrice sur mobile */
+    }
+
+    #resultat {
+        font-size: 1.2em;
+    }
+}
+/* --- NOUVEAU : Style du bouton de bascule --- */
+#toggle-historique-btn {
+    background-color: var(--couleur-secondaire);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: var(--transition-rapide);
+}
+
+#toggle-historique-btn:hover {
+    background-color: #5a6268;
+    transform: none;
+}
+
+/* --- CLASSE POUR MASQUER LE CONTENU (par défaut, il est visible) --- */
+.historique-cache {
+    /* Cache l'élément de manière à ce qu'il ne prenne plus de place */
+    display: none; 
+}
+
+/* Le conteneur de l'historique sera ciblé par JS pour l'affichage/masquage */
+#historique-conteneur {
+    transition: opacity 0.3s ease; /* Ajoute une transition douce si on bascule en jouant sur l'opacité/display */
+}
